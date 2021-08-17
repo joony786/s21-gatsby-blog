@@ -60,7 +60,12 @@ const BlogIndex = ({ data, location }) => {
               <Link to={post.fields.slug} itemProp="url">[ Keep reading ]</Link>
             </header>
             <div className="index-story-img">
-              <Link to={post.fields.slug} itemProp="url"><img src="https://images.unsplash.com/photo-1560472962-4388d184d933?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="" /></Link>
+              <Link to={post.fields.slug} itemProp="url">
+                <img src={
+                  post.frontmatter.image ||
+                    "https://images.unsplash.com/photo-1560472962-4388d184d933?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+                 } alt="" />
+              </Link>
             </div>
           </article>
         )
@@ -86,8 +91,10 @@ export const pageQuery = graphql`
         }
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
+          updated(formatString: "MMMM DD, YYYY")
           title
           description
+          image
         }
       }
     }

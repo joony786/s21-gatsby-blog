@@ -489,3 +489,17 @@ button {
   color: var(--col-a-light);
   text-shadow: 0.125rem 0.125rem 0 var(--col-a-darker);
 }
+.header-img {
+  min-height: 50vh;
+  background-color: var(--col-a-lighter);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  display: grid;
+  align-content: end;
+  padding: 1em;
+}
+.header-img * {
+  color: white;
+  mix-blend-mode: difference;
+}
