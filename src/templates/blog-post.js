@@ -9,7 +9,10 @@ const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
-  deckDeckGoHighlightElement()
+
+  console.log(data.site.siteMetadata.image)
+  const style = (post.frontmatter.image) ? {backgroundImage: `url(${post.frontmatter.image})`} : {}
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
@@ -21,10 +24,13 @@ const BlogPostTemplate = ({ data, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header className="story-header">
+        <header className={`story-header ${(post.frontmatter.image) && `header-img`}`} style={style}>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <div class="published"><time>{post.frontmatter.date}</time></div>
-          <div class="published"><time>Last Updated: FRONTMATER.UPDATED</time></div>
+          {
+            post.frontmatter.updated &&
+              <div class="published"><time>Last Updated: {post.frontmatter.updated}</time></div>
+          }
         </header>
 
         <section
@@ -81,8 +87,10 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "MMM DD, YYYY")
+        updated(formatString: "MMM DD, YYYY")
         description
+        image
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
