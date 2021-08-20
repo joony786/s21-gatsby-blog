@@ -29,6 +29,7 @@ const BlogPostTemplate = ({ data, location }) => {
           <div class="published"><time>{post.frontmatter.date}</time></div>
           {
             post.frontmatter.updated &&
+
               <div class="published"><time>Last Updated: {post.frontmatter.updated}</time></div>
           }
         </header>
